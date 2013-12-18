@@ -122,11 +122,24 @@
 			<version>3.0</version>
 		</dependency>
 		
-		<!-- Validation dependencies -->
+		<!-- JSTL dependencies --> 
+        <dependency>
+                <groupId>taglibs</groupId>
+                <artifactId>standard</artifactId>
+                <version>1.1.2</version>
+        </dependency>         
+        <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.1.2</version>
+        </dependency>
+		
+		<!-- Commons dependencies with for instance
+		StringUtils -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.2.0.Final</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
 		</dependency>	
 		
 		<!-- Java API dependencies -->

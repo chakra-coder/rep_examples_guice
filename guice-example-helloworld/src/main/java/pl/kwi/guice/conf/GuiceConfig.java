@@ -7,11 +7,11 @@ import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 
 @WebListener
-public class MyGuiceConfig extends GuiceServletContextListener {
+public class GuiceConfig extends GuiceServletContextListener {
 
        @Override
        protected Injector getInjector() {
-              return Guice.createInjector(new MyServletModule());
+              return Guice.createInjector(new GuiceServletModule());
        }
 
 }

@@ -2,6 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 
 <html>
 
@@ -24,7 +25,7 @@
 		<div class="subtitle"><h3>Page: <b>Input</b></h3></div>
 		<div class="content">
 			<div class="contentElement">
-				<div class="text">Name * </div>
+				<div class="text">Name * <c:if test="${not empty requestScope.errorMessages}"><span class="error">${requestScope.errorMessages.name}<span></c:if></div>
 				<div class="input"><input type="text" id="name" name="name" /></div>
 				<div class="description">Type your name here</div>
 			</div>

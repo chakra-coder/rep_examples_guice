@@ -1,6 +1,7 @@
 package pl.kwi.servlets;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pl.kwi.services.NameService;
+import pl.kwi.validators.InputValidator;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -20,6 +22,9 @@ public class InputServlet extends HttpServlet{
 	
 	@Inject
 	private NameService nameService;
+	
+	@Inject
+	private InputValidator inputValidator;
 	
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response)
@@ -44,8 +49,15 @@ public class InputServlet extends HttpServlet{
 		
 	}
 	
-	private void handleOkButton(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	private void handleOkButton(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 					
+		Map<String, String> errorMessages = inputValidator.getErrorMessages(request);
+		if(!errorMessages.isEmpty()) {
+			request.setAttribute("errorMessages", errorMessages);
+			displayPage(request, response);
+			return;
+		}
+		
 		String name = request.getParameter("name");	
 		nameService.save(name);
 		response.sendRedirect("output.do?submit=Display");
