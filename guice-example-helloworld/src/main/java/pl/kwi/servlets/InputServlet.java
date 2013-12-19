@@ -15,6 +15,12 @@ import pl.kwi.validators.InputValidator;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+/**
+ * Class of Servlet handles requests from "Input" jsp page. 
+ * 
+ * @author Krzysztof Wisniewski
+ *
+ */
 @Singleton
 public class InputServlet extends HttpServlet{
 
@@ -26,6 +32,9 @@ public class InputServlet extends HttpServlet{
 	@Inject
 	private InputValidator inputValidator;
 	
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#service(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
@@ -42,6 +51,14 @@ public class InputServlet extends HttpServlet{
 			
 	}
 	
+	/**
+	 * Method displays page *.jsp with input.
+	 * 
+	 * @param request object <code>HttpServletRequest</code> with request from browser
+	 * @param response object <code>HttpServletResponse</code> with response to browser
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void displayPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("pages/inputJsp.jsp");
@@ -49,11 +66,18 @@ public class InputServlet extends HttpServlet{
 		
 	}
 	
+	/**
+	 * Method handles pressing button "Ok" on "Input" jsp page.
+	 * 
+	 * @param request object <code>HttpServletRequest</code> with request from browser
+	 * @param response object <code>HttpServletResponse</code> with response to browser
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	private void handleOkButton(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 					
 		Map<String, String> errorMessages = inputValidator.getErrorMessages(request);
-		if(!errorMessages.isEmpty()) {
-			request.setAttribute("errorMessages", errorMessages);
+		if(!errorMessages.isEmpty()) {			
 			displayPage(request, response);
 			return;
 		}

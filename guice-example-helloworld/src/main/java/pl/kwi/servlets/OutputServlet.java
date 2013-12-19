@@ -13,6 +13,12 @@ import pl.kwi.services.NameService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+/**
+ * Class of Servlet handles requests from "Output" jsp page. 
+ * 
+ * @author Krzysztof Wisniewski
+ *
+ */
 @Singleton
 public class OutputServlet extends HttpServlet{
 
@@ -21,6 +27,9 @@ public class OutputServlet extends HttpServlet{
 	@Inject
 	private NameService nameService;
 	
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#service(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
@@ -37,6 +46,14 @@ public class OutputServlet extends HttpServlet{
 				
 	}
 	
+	/**
+	 * Method displays page *.jsp with output.
+	 * 
+	 * @param request object <code>HttpServletRequest</code> with request from browser
+	 * @param response object <code>HttpServletResponse</code> with response to browser
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void displayPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			
 		request.setAttribute("name", loadName());
@@ -45,12 +62,25 @@ public class OutputServlet extends HttpServlet{
 		
 	}
 	
+	/**
+	 * Method handles pressing button "Back" on "Output" jsp page.
+	 * 
+	 * @param request object <code>HttpServletRequest</code> with request from browser
+	 * @param response object <code>HttpServletResponse</code> with response to browser
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	private void handleBackButton(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
 		response.sendRedirect("input.do?submit=Display");
 		
 	}
 	
+	/**
+	 * Method loads current name of user.
+	 * 
+	 * @return object <code>String</code> with user`s name
+	 */
 	protected String loadName(){
 		return nameService.load();
 	}

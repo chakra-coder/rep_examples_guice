@@ -1,13 +1,11 @@
-- dodaæ guice dependencje
-
 DESCRIPTION
 ===========
 
-This is example project built by using framework Spring 3 MVC. It consists of two pages:
+This is example project built by using framework Guice. It consists of two pages:
 - input page		: here you can type your name;
 - output page		: here your name is displayed after text "Hello World"
 
-This project shows how to use framework Spring 3 MVC together with:
+This project shows how to use framework Guice together with:
 - java script;
 - css;
 - validation.
@@ -20,7 +18,21 @@ mvn clean install -Ploc,deploy
 Recommended usage of project:
 -----------------------------
 Browser url:
-http://localhost:8080/Spring3Mvc-example-helloworld
+http://localhost:8080/guice-example-helloworld
+
+
+
+
+
+GUICE INSTALLATION STEPS
+========================
+
+To create Guice application developer has to:
+- add Guice dependency in Maven;
+- create class module for Servlets which extends class ServletModule. Here mapping for Servlets has to be definied;
+- create class of listener for Guice config. Here module for Servlet has to be added;
+- add annotation @Singleton over every Servlet;
+- inject java classes using anntotation @Inject.
 
 
 
@@ -89,4 +101,4 @@ USAGE
 
 Type in browser:
 
-http://localhost:8080/Spring3Mvc-example-helloworld
+http://localhost:8080/guice-example-helloworld
