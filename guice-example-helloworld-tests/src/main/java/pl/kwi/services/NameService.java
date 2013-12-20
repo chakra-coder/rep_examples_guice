@@ -11,7 +11,7 @@ import java.util.Properties;
 public class NameService {
 	
 	
-	private static final String NAME_PROP = "name";
+	public static final String NAME_PROP = "name";
 	private Properties props;
 
 	
@@ -36,6 +36,19 @@ public class NameService {
 	 */
 	public String load() {
 		return props.getProperty(NAME_PROP);
+	}
+	
+	
+	// ************************************************************************************************** //
+	// ************************************ GETTERS AND SETTERS ***************************************** //
+	// ************************************************************************************************** //
+	
+	
+	public Properties getProps() {
+		return props;
+	}
+	public void setProps(Properties props) {
+		this.props = props;
 	}
 	
 	
