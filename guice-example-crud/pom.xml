@@ -1,0 +1,212 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>pl.kwi</groupId>
+	<artifactId>guice-example-crud</artifactId>
+	<packaging>war</packaging>
+	<version>1.0</version>
+	
+	
+	
+	<properties>
+		<!-- Hibernate properties -->
+		<hibernate.version>4.1.7.Final</hibernate.version>
+		<!-- File properties -->
+		<project.properties.file>project.properties</project.properties.file>					
+	</properties>
+	
+	
+	
+	<profiles>
+
+		<!-- Profile 'loc' (abbreviation for 'local'): location profile. 
+		Indicates local computer as a place for task profiles. -->
+		<profile>
+			<id>loc</id>			
+			<properties>
+				<!-- Server data -->
+				<server.url>${loc.server.url}</server.url>
+				<server.username>${loc.server.username}</server.username>
+				<server.password>${loc.server.password}</server.password>
+				<server.path>/${project.artifactId}</server.path>
+				
+				<main.db.url>${loc.main.db.url}</main.db.url>
+				<main.db.driver>${loc.main.db.driver}</main.db.driver>
+				<main.db.username>${loc.main.db.username}</main.db.username>
+				<main.db.password>${loc.main.db.password}</main.db.password>				
+			</properties>							
+		</profile>
+
+		<!-- Profile 'deploy': task profile.
+		Deploys project on computer indicated by location profile. -->
+		<profile>
+			<id>deploy</id>									
+			<build>
+				<plugins>					
+					<plugin>
+				        <groupId>org.apache.tomcat.maven</groupId>
+		          		<artifactId>tomcat7-maven-plugin</artifactId>
+		          		<version>2.0</version>
+				        <executions>
+				        	<execution>
+				        		<phase>pre-integration-test</phase>
+				        		<goals>
+				        			<goal>deploy</goal>
+				        		</goals>
+				        	</execution>
+				        </executions>
+				        <configuration>
+				        	<url>${server.url}</url>
+				        	<username>${server.username}</username>
+		          			<password>${server.password}</password>
+		          			<path>${server.path}</path>
+                            <update>true</update>
+				        </configuration>
+				      </plugin>			          
+				</plugins>
+			</build>						
+		</profile>
+
+	</profiles>
+	
+	
+	
+	<build>		
+		<finalName>${artifactId}</finalName>
+		
+		<resources>
+			<resource>
+				<directory>src/main/resources/</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources/</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		
+		<plugins>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			
+			<!-- Plugin for reading properties from
+			external file -->
+			<plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>properties-maven-plugin</artifactId>
+		        <version>1.0-alpha-2</version>
+		        <executions>
+		          <execution>
+		            <phase>initialize</phase>
+		            <goals>
+		              <goal>read-project-properties</goal>
+		            </goals>
+		            <configuration>
+		              <files>
+		                <file>${project.properties.file}</file>
+		              </files>
+		            </configuration>
+		          </execution>
+		        </executions>
+		      </plugin>
+			
+		</plugins>
+	</build>
+		
+
+
+	<dependencies>
+	
+		<!-- Guice dependencies -->
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+			<version>3.0</version>
+		</dependency>	
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-persist</artifactId>
+			<version>3.0</version>
+		</dependency>
+		
+		<!-- JSTL dependencies --> 
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>	 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		
+		<!-- Log dependencies -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+		
+		<!-- Hibernate dependencies -->
+		 <dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>${hibernate.version}</version>
+		</dependency> 		
+		<dependency>
+		    <groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
+		</dependency>
+		
+		<!-- Data base dependencies -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.10</version>
+		</dependency>
+		
+		<!-- Commons dependencies with for instance
+		StringUtils -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+		
+		<!-- Java API dependencies -->
+		<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>6.0</version>
+		    <scope>provided</scope>
+		</dependency>	
+						
+	</dependencies>
+	
+
+
+</project>

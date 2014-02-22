@@ -41,12 +41,12 @@ public class InputServlet extends HttpServlet{
 				
 		String submit = request.getParameter("submit");
 		
-		if("Display".equals(submit)){
+		if("Display".equals(submit)) {
 			displayPage(request, response);
-			return;
-		}else if("OK".equals(submit)){
+		} else if("OK".equals(submit)) {
 			handleOkButton(request, response);
-			return;
+		} else {
+			throw new ServletException("No handling of action: " + submit);
 		}
 			
 	}
@@ -74,7 +74,7 @@ public class InputServlet extends HttpServlet{
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	private void handleOkButton(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+	private void handleOkButton(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 					
 		Map<String, String> errorMessages = inputValidator.getErrorMessages(request);
 		if(!errorMessages.isEmpty()) {			
@@ -87,5 +87,21 @@ public class InputServlet extends HttpServlet{
 		response.sendRedirect("output.do?submit=Display");
 		
 	}
+	
+	
+	// ************************************************************************************** //
+	// ****************************** GETTERS AND SETTERS *********************************** //
+	// ************************************************************************************** //
+	
+	
+	public void setNameService(NameService nameService) {
+		this.nameService = nameService;
+	}
+
+	public void setInputValidator(InputValidator inputValidator) {
+		this.inputValidator = inputValidator;
+	}
+	
+	
 
 }

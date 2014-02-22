@@ -41,12 +41,12 @@ public class InputServlet extends HttpServlet{
 				
 		String submit = request.getParameter("submit");
 		
-		if("Display".equals(submit)){
+		if("Display".equals(submit)) {
 			displayPage(request, response);
-			return;
-		}else if("OK".equals(submit)){
+		} else if("OK".equals(submit)) {
 			handleOkButton(request, response);
-			return;
+		} else {
+			throw new ServletException("No handling of action: " + submit);
 		}
 			
 	}

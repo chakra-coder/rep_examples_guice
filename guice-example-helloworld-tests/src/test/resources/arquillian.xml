@@ -7,6 +7,7 @@ http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
  
        <container qualifier="tomcat" default="true">
            <configuration>
+           		<property name="tomcatHome">target/tomcat-embedded-7</property>
                <property name="unpackArchive">true</property>
                <property name="bindHttpPort">${test.intg.port}</property>
            </configuration>

@@ -8,7 +8,9 @@ This is example project built by using framework Guice. It consists of two pages
 This project shows how to use framework Guice together with:
 - java script;
 - css;
-- validation.
+- validation;
+- unit tests (basing on JUnit and Mockito);
+- integration tests (basing on Selenium and Mockito).
 
 Recommended deployment of project:
 ----------------------------------
@@ -18,7 +20,26 @@ mvn clean install -Ploc,deploy
 Recommended usage of project:
 -----------------------------
 Browser url:
-http://localhost:8080/guice-example-helloworld
+http://localhost:8080/guice-example-helloworld-tests
+
+Recommended usage of integration tests:
+---------------------------------------
+Maven command:
+mvn clean install -Ploc,intg 
+
+
+
+
+
+GUICE INSTALLATION STEPS
+========================
+
+To create Guice application developer has to:
+- add Guice dependency in Maven;
+- create class module for Servlets which extends class ServletModule. Here mapping for Servlets has to be definied;
+- create class of listener for Guice config. Here module for Servlet has to be added;
+- add annotation @Singleton over every Servlet;
+- inject java classes using anntotation @Inject.
 
 
 
@@ -90,7 +111,35 @@ You can do it using following steps:
 - Go to project folder "Spring3Mvc-example-helloworld";
 - Use Maven command for building and deployment project. Command:
  
-  mvn clean install -Ploc,deploy  
+  mvn clean install -Ploc,deploy 
+  
+  
+  
+  
+  
+  UNIT TESTS
+==========
+
+To run unit tests you have to use maven command:
+
+		mvn clean install -Ploc,unit
+
+
+
+
+
+INTEGRATION TESTS
+=================
+
+This project has set of integration tests based on Selenium tool. To run integration tests you have to:
+
+- Configure embedded Tomcat port (optional)
+In file <project_home>/project.properties you can change embedded Tomcat port.
+Update property "loc.test.intg.port". By default it is "8181".
+
+- Run integration tests
+To run integration tests you have to use maven command:
+			mvn clean install -Ploc,intg 
 
 
 
@@ -101,4 +150,4 @@ USAGE
 
 Type in browser:
 
-http://localhost:8080/guice-example-helloworld
+http://localhost:8080/guice-example-helloworld-tests

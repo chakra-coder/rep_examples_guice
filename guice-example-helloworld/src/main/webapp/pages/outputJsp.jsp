@@ -7,7 +7,7 @@
 
 
 <head>
-	<title>Hello World</title>
+	<title>Hello World - Output</title>
 	<link type="text/css" rel="stylesheet" href="css/style.css">
 	<link type="text/css" rel="stylesheet" href="css/jquery-ui-1.10.3/smoothness/jquery-ui-1.10.3.custom.css">
 	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
@@ -20,13 +20,13 @@
 <form method="get" action="">
 
 	<div class="page">
-		<div class="title"><h2>Hello World</h2></div>
-		<div class="subtitle"><h3>Page: <b>Output</b></h3></div>
-		<div class="content">
+		<div id="title" class="title"><h2>Hello World</h2></div>
+		<div id="subtitle" class="subtitle"><h3>Page: <b>Output</b></h3></div>
+		<div id="content" class="content">
 			<div class="contentElement">
 				<div>&nbsp;</div>
-				<div class="text"> Hello World <b>${requestScope.name}</b> </div>
-				<div>&nbsp;</div>
+				<div id="name" class="text"> Hello World <b>${requestScope.name}</b> </div>
+				<div class="image"><img id="duke" alt="duke" src="images/duke.jpg"></div>
 			</div>
 			
 		</div>

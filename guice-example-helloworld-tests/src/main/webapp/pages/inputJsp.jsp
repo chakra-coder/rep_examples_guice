@@ -21,11 +21,11 @@
 <form method="get" action="">
 
 	<div class="page">
-		<div id="title" name="title" class="title"><h2>Hello World</h2></div>
-		<div id="subtitle" name="subtitle" class="subtitle"><h3>Page: <b>Input</b></h3></div>
-		<div id="content" name="content" class="content">
+		<div id="title" class="title"><h2>Hello World</h2></div>
+		<div id="subtitle" class="subtitle"><h3>Page: <b>Input</b></h3></div>
+		<div id="content" class="content">
 			<div class="contentElement">
-				<div class="text">Name * <c:if test="${not empty requestScope.errorMessages}"><span id="name.errors" class="error">${requestScope.errorMessages.name}<span></c:if></div>
+				<div class="text">Name * <c:if test="${not empty requestScope.errorMessages}"><span id="name.errors" class="error">${requestScope.errorMessages.name}</span></c:if></div>
 				<div class="input"><input type="text" id="name" name="name" /></div>
 				<div class="description">Type your name here</div>
 			</div>

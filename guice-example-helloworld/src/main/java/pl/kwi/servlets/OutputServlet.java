@@ -36,12 +36,12 @@ public class OutputServlet extends HttpServlet{
 					
 		String submit = request.getParameter("submit");
 		
-		if("Display".equals(submit)){
+		if("Display".equals(submit)) {
 			displayPage(request, response);
-			return;
-		}else if("Back".equals(submit)){
+		} else if("Back".equals(submit)) {
 			handleBackButton(request, response);
-			return;
+		} else {
+			throw new ServletException("No handling of action: " + submit);
 		}
 				
 	}
